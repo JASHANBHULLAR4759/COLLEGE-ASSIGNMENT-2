@@ -1,7 +1,0 @@
-My Reflection (Week 8 — My Data Story)
-
-- I learned how to open a text file and read lines safely.
-- I can show line numbers and count lines, words, and characters.
-- Finding the longest, first, and last lines was straightforward.
-- This helps in business because many notes/logs are plain text, and a small script can summarise them fast.
-- Next, I want to read a CSV and make a simple chart (e.g., runs per over).
