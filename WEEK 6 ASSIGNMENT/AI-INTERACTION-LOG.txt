@@ -1,0 +1,598 @@
+Skip to content
+Chat history
+
+You said:
+worksheet.ipynb
+File
+HEY CHATGPT , THIS IS MY ASSIGNMENT PLEASE EXPLAIN ME IN SIMPLE PLAIN LANGUAGE AND MAKE SIMPLE TO DO LIST 
+ChatGPT said:
+
+Thought for 1m 33s
+Got you, JJ! I opened your notebook and here’s the assignment, super simple.
+
+What this assignment is about (plain English)
+You’re building a tiny Contact Book in Google Colab using Python dictionaries.
+
+Part A (Basics): Make a dictionary of contacts (name → phone), add yourself, update a number, then print all contacts neatly.
+
+Part B (Stretch): Upgrade the structure so each person has both phone and email (a nested dictionary), then print them neatly.
+
+Part C (Optional): Look at an over-complicated example and write a short note on why it’s hard to use, then suggest a simpler design.
+
+Finish: Show your tutor, push the notebook to your Assessment 2 GitHub repo, and add a short note about how you used AI.
+
+Simple to-do list (checklist you can copy)
+Setup
+ Open Google Colab → new notebook.
+
+ Rename to week06_portfolio_contact_book.ipynb.
+
+ Keep this notebook ready to push to your Assessment 2 GitHub repo.
+
+Part A — Basic dictionary (name → phone)
+ A1: Create a dictionary called contacts with 3 people.
+Example shape:
+{"Alice": "0400 123 456", "Bob": "0411 000 999", "Charlie": "0432 555 777"}
+
+ A2: Add your own name (or another new person) to contacts.
+
+ A3: Update an existing person’s phone number (e.g., change Bob’s number).
+
+ A4: Print all contacts in a neat, one-line format like:
+Alice: 0400 123 456
+
+Part B — Nested dictionary (Stretch)
+ B1: Redesign contacts so each person stores both phone and email:
+Example shape:
+{"Alice": {"phone": "0400 123 456", "email": "alice@example.com"}}
+
+ B2: Print all contacts in a neat format like:
+Alice — Phone: 0400 123 456 | Email: alice@example.com
+
+ (Optional) Add a simple lookup using input() to show one person’s details by name.
+
+Part C — Critique AI output (Optional, 3–5 mins)
+ Read the over-complicated example in the notebook (don’t run it).
+
+ Write 2 reasons it’s hard to read/use (e.g., too deeply nested, unclear keys).
+
+ Write 1 simple redesign (e.g., the nested {"phone": ..., "email": ...} you used).
+
+Submit & reflect
+ Show your notebook to your tutor for a quick check.
+
+ Commit & push the notebook to your Assessment 2 GitHub repo
+(suggested message: Week 6 – Mini Contact Book).
+
+ In your repo README.md (or a final markdown cell), add a short AI usage note:
+
+ The prompt(s) you tried.
+
+ What you changed/fixed from AI’s suggestion.
+
+ One concept you want to practise (e.g., .items(), .get()).
+
+If you want, I can also drop in a tiny example of the print loops for Part A and Part B to copy-paste.
+
+You said:
+Hey python tutor, now  I need to create a contact book in Python using a dictionary. Each key should be a person’s name and the value their phone number. Please generate an example with at least three entries.
+ChatGPT said:
+
+Thought for 7s
+Here’s a simple contact book using a Python dictionary (name → phone). You can run this as-is:
+
+# Basic contact book: name -> phone number
+contacts = {
+    "Alice Nguyen": "0400 123 456",
+    "Bob Singh": "0412 345 678",
+    "Charlie Brown": "0433 987 210",
+}
+
+# Show all contacts neatly
+for name, phone in contacts.items():
+    print(f"{name}: {phone}")
+
+# --- Optional examples ---
+# Add a new contact
+contacts["JJ Bhullar"] = "0401 222 333"
+
+# Update an existing number
+contacts["Bob Singh"] = "0411 000 999"
+
+# Lookup safely (uncomment to try)
+# search = "Alice Nguyen"
+# print(f"{search}: {contacts.get(search, 'Not found')}")
+You said:
+Update the phone number of an existing contact in the dictionary. Explain the correct syntax to do this in Python.
+ChatGPT said:
+
+Thought for 5s
+Here’s the simplest, correct way to update a phone number in a Python dictionary:
+
+contacts = {
+    "Alice Nguyen": "0400 123 456",
+    "Bob Singh": "0412 345 678",
+    "Charlie Brown": "0433 987 210",
+}
+
+# Overwrite Bob's number
+contacts["Bob Singh"] = "0411 000 999"
+Why this works
+dict[key] = new_value assigns a new value to that key.
+
+If the key exists, its value is overwritten.
+
+If the key doesn’t exist, this creates a new entry (no error).
+
+Alternative (also correct)
+contacts.update({"Bob Singh": "0411 000 999"})
+update() can change one or many keys at once: contacts.update({"Bob Singh": "...", "Alice Nguyen": "..."}).
+
+“Update only if it exists” (optional safety)
+name = "Bob Singh"
+if name in contacts:
+    contacts[name] = "0411 000 999"
+else:
+    print(f"{name} not found")
+Common gotcha: keys are case-sensitive and must match exactly ("bob singh" ≠ "Bob Singh").
+
+You said:
+Hey python tutot, now I want to print each contact in the format 'Name: Phone Number'. Write a Python loop that will go through the dictionary and print each contact clearly
+ChatGPT said:
+
+Thought for a few seconds
+Here’s a clear loop to print each contact as Name: Phone Number:
+
+# Assuming you already have a dictionary called contacts
+for name, phone in contacts.items():
+    print(f"{name}: {phone}")
+Optional (alphabetical by name):
+
+for name in sorted(contacts):
+    print(f"{name}: {contacts[name]}")
+You said:
+Now i want to convert the current contact book into a nested dictionary so each contact stores both a phone number and an email address. Please provide the correct data structure.
+ChatGPT said:
+
+Thought for 5s
+Here’s the correct nested dictionary structure (each person → {phone, email}):
+
+# Nested contact book: name -> {phone, email}
+contacts = {
+    "Alice Nguyen": {
+        "phone": "0400 123 456",
+        "email": "alice.nguyen@example.com"
+    },
+    "Bob Singh": {
+        "phone": "0412 345 678",
+        "email": "bob.singh@example.com"
+    },
+    "Charlie Brown": {
+        "phone": "0433 987 210",
+        "email": "charlie.brown@example.com"
+    },
+}
+(Optional) Converting from your old name -> phone dictionary
+If you already have:
+
+old_contacts = {
+    "Alice Nguyen": "0400 123 456",
+    "Bob Singh": "0412 345 678",
+    "Charlie Brown": "0433 987 210",
+}
+Convert to nested like this (beginner-friendly loop):
+
+contacts = {}
+for name, phone in old_contacts.items():
+    contacts[name] = {"phone": phone, "email": ""}  # start with blank email
+Print nicely
+for name, info in contacts.items():
+    print(f"{name} — Phone: {info['phone']} | Email: {info['email']}")
+Update one field
+contacts["Bob Singh"]["email"] = "bob.singh@example.com"
+You said:
+hey chatgpt, Now write a Python loop to print each contact’s name, phone, and email from the nested dictionary. Format the output for readability.
+ChatGPT said:
+
+Thought for 17s
+Here’s a clean loop to print each contact from the nested dictionary:
+
+# contacts: name -> {"phone": "...", "email": "..."}
+for name, info in contacts.items():
+    phone = info.get("phone", "N/A")   # .get avoids KeyError if key missing
+    email = info.get("email", "N/A")
+    print(f"{name} — Phone: {phone} | Email: {email}")
+Optional: alphabetical order
+
+for name in sorted(contacts):
+    info = contacts[name]
+    print(f"{name} — Phone: {info.get('phone','N/A')} | Email: {info.get('email','N/A')}")
+Optional: aligned columns (beginner-friendly)
+
+# Find the longest name for neat alignment
+max_name_len = 0
+for n in contacts:
+    if len(n) > max_name_len:
+        max_name_len = len(n)
+
+# Print with padded name column
+for name, info in contacts.items():
+    phone = info.get("phone", "N/A")
+    email = info.get("email", "N/A")
+    print(f"{name:<{max_name_len}} | Phone: {phone:<12} | Email: {email}")
+You said:
+give the final code not in part
+ChatGPT said:
+
+Thought for 13s
+# Contact Book (nested dictionary) and neat printing
+# - Each name maps to a dict with phone and email
+# - Prints as aligned columns: Name | Phone | Email
+
+# 1) Define the nested contact book
+contacts = {
+    "Alice Nguyen": {
+        "phone": "0400 123 456",
+        "email": "alice.nguyen@example.com"
+    },
+    "Bob Singh": {
+        "phone": "0412 345 678",
+        "email": "bob.singh@example.com"
+    },
+    "Charlie Brown": {
+        "phone": "0433 987 210",
+        "email": "charlie.brown@example.com"
+    },
+    # Add your own if you like:
+    "JJ Bhullar": {
+        "phone": "0401 222 333",
+        "email": "jj.bhullar@example.com"
+    },
+}
+
+# 2) Compute the width for the Name column for tidy alignment
+max_name_len = 0
+for n in contacts:
+    if len(n) > max_name_len:
+        max_name_len = len(n)
+
+# 3) Print header and a separator
+header = f"{'Name':<{max_name_len}} | {'Phone':<14} | Email"
+print(header)
+print("-" * len(header))
+
+# 4) Print each contact
+for name, info in contacts.items():
+    phone = info.get("phone", "N/A")
+    email = info.get("email", "N/A")
+    print(f"{name:<{max_name_len}} | {phone:<14} | {email}")
+You said:
+Add a simple lookup feature. When the user inputs a contact’s name, the program should print that person’s phone and email if they exist in the dictionary
+ChatGPT said:
+
+Thought for 16s
+# Contact Book (nested dictionary) + simple name lookup
+# - Each name maps to a dict with phone and email
+# - Prints aligned table of all contacts
+# - Lets the user type a name to see that person's details
+
+# 1) Define the nested contact book
+contacts = {
+    "Alice Nguyen": {
+        "phone": "0400 123 456",
+        "email": "alice.nguyen@example.com"
+    },
+    "Bob Singh": {
+        "phone": "0412 345 678",
+        "email": "bob.singh@example.com"
+    },
+    "Charlie Brown": {
+        "phone": "0433 987 210",
+        "email": "charlie.brown@example.com"
+    },
+    "JJ Bhullar": {
+        "phone": "0401 222 333",
+        "email": "jj.bhullar@example.com"
+    },
+}
+
+# 2) Compute the width for the Name column for tidy alignment
+max_name_len = 0
+for n in contacts:
+    if len(n) > max_name_len:
+        max_name_len = len(n)
+
+# 3) Print header and a separator
+header = f"{'Name':<{max_name_len}} | {'Phone':<14} | Email"
+print(header)
+print("-" * len(header))
+
+# 4) Print each contact
+for name, info in contacts.items():
+    phone = info.get("phone", "N/A")
+    email = info.get("email", "N/A")
+    print(f"{name:<{max_name_len}} | {phone:<14} | {email}")
+
+# 5) Simple lookup by name (case-insensitive, exact match on letters)
+user_input = input("\nEnter a contact's name to look up: ").strip()
+
+if user_input == "":
+    print("No name entered.")
+else:
+    # Try exact match first
+    if user_input in contacts:
+        info = contacts[user_input]
+        print(f"{user_input} — Phone: {info.get('phone','N/A')} | Email: {info.get('email','N/A')}")
+    else:
+        # Case-insensitive fallback
+        found = False
+        for name in contacts:
+            if name.lower() == user_input.lower():
+                info = contacts[name]
+                print(f"{name} — Phone: {info.get('phone','N/A')} | Email: {info.get('email','N/A')}")
+                found = True
+                break
+        if not found:
+            print(f"Contact '{user_input}' not found.")
+You said:
+Uploaded image
+Critique the following dictionary structure for clarity and usability in Python. Suggest two reasons why it is difficult to read or use, and propose a cleaner design using standard dictionary practices.
+ChatGPT said:
+
+Thought for 20s
+Here’s a quick critique and a cleaner redesign.
+
+What’s hard about the given structure
+book = {
+    "people": [
+        {"n": "Alice", "v": ["phone", "0400 123 456", "email", "alice@example.com"]},
+        {"n": "Bob",   "v": ["phone", "0411 000 999", "email", "bob@example.com"]}
+    ]
+}
+1) Awkward data encoding in v:
+The contact details are crammed into a flat list with alternating labels and values. You must remember positions ("phone" is at index 0, number at 1, etc.), which is error-prone and unreadable. You also can’t do natural lookups like v["phone"].
+
+2) Inefficient lookups & duplicates risk:
+People are stored in a list, so finding “Alice” means scanning the whole list and matching obj["n"]. That’s slower and allows duplicate names. In Python, a dict is the natural structure for keyed lookup.
+
+Cleaner, standard design (dictionary of dictionaries)
+Use the person’s name as the key, and store fields in a nested dict with descriptive keys:
+
+contacts = {
+    "Alice":  {"phone": "0400 123 456", "email": "alice@example.com"},
+    "Bob":    {"phone": "0411 000 999", "email": "bob@example.com"},
+}
+Why this is better
+
+Direct O(1) lookup: contacts["Alice"]["phone"]
+
+Readable keys: phone, email instead of positional list entries
+
+Easy updates: contacts["Bob"]["email"] = "bob@new.com"
+
+Simple printing:
+
+for name, info in contacts.items():
+    print(f"{name} — Phone: {info.get('phone','N/A')} | Email: {info.get('email','N/A')}")
+If you must keep a top-level container like book, use a dict there too:
+
+book = {"people": contacts}
+You said:
+Uploaded image
+ChatGPT said:
+
+Thought for 18s
+Paste this into that cell:
+
+# ← Optional: write brief notes here as a multiline string
+critique_notes = """
+1) The 'v' field crams labels and values into a flat list (["phone", "...", "email", "..."]).
+   This is order-dependent, hard to read, and you can’t do natural key lookups like v["phone"].
+
+2) People are stored inside a list under "people". That means O(n) scans to find a name,
+   allows duplicate names, and makes updates awkward.
+
+Redesign idea:
+Use a dictionary keyed by name, with a nested dictionary for clear fields.
+
+contacts = {
+    "Alice": {"phone": "0400 123 456", "email": "alice@example.com"},
+    "Bob":   {"phone": "0411 000 999", "email": "bob@example.com"}
+}
+
+Benefits: direct lookup contacts["Alice"]["phone"], readable keys, easy updates/printing.
+"""
+
+critique_notes
+You said:
+Add functionality to delete a contact from the dictionary. The user should input a name, and the program should remove that contact if it exists."
+ChatGPT said:
+
+Thought for 15s
+# Contact Book (nested dict) with lookup AND delete-by-name
+# - Each name maps to a dict with phone and email
+# - Prints aligned table
+# - Lets the user look up a name
+# - Lets the user delete a contact by name (case-insensitive match)
+
+# 1) Define contacts
+contacts = {
+    "Alice Nguyen": {"phone": "0400 123 456", "email": "alice.nguyen@example.com"},
+    "Bob Singh": {"phone": "0412 345 678", "email": "bob.singh@example.com"},
+    "Charlie Brown": {"phone": "0433 987 210", "email": "charlie.brown@example.com"},
+    "JJ Bhullar": {"phone": "0401 222 333", "email": "jj.bhullar@example.com"},
+}
+
+# 2) Helper: compute width for Name column
+max_name_len = 0
+for n in contacts:
+    if len(n) > max_name_len:
+        max_name_len = len(n)
+
+# 3) Print header + table
+header = f"{'Name':<{max_name_len}} | {'Phone':<14} | Email"
+print(header)
+print("-" * len(header))
+for name, info in contacts.items():
+    print(f"{name:<{max_name_len}} | {info.get('phone','N/A'):<14} | {info.get('email','N/A')}")
+
+# 4) Simple lookup by name
+user_input = input("\nEnter a contact's name to look up: ").strip()
+if user_input:
+    if user_input in contacts:
+        info = contacts[user_input]
+        print(f"{user_input} — Phone: {info.get('phone','N/A')} | Email: {info.get('email','N/A')}")
+    else:
+        found = False
+        for name in contacts:
+            if name.lower() == user_input.lower():
+                info = contacts[name]
+                print(f"{name} — Phone: {info.get('phone','N/A')} | Email: {info.get('email','N/A')}")
+                found = True
+                break
+        if not found:
+            print(f"Contact '{user_input}' not found.")
+
+# 5) DELETE a contact by name
+delete_input = input("\nEnter a contact's name to DELETE: ").strip()
+if delete_input:
+    if delete_input in contacts:
+        contacts.pop(delete_input)
+        print(f"Deleted '{delete_input}'.")
+    else:
+        # case-insensitive fallback
+        matched_key = ""
+        for name in contacts:
+            if name.lower() == delete_input.lower():
+                matched_key = name
+                break
+        if matched_key:
+            contacts.pop(matched_key)
+            print(f"Deleted '{matched_key}'.")
+        else:
+            print(f"Contact '{delete_input}' not found; nothing deleted.")
+else:
+    print("No name entered for deletion.")
+
+# 6) Reprint updated table
+# (recompute width in case the longest name was deleted)
+max_name_len = 0
+for n in contacts:
+    if len(n) > max_name_len:
+        max_name_len = len(n)
+
+print("\nUpdated contacts:")
+header = f"{'Name':<{max_name_len}} | {'Phone':<14} | Email"
+print(header)
+print("-" * len(header))
+for name, info in contacts.items():
+    print(f"{name:<{max_name_len}} | {info.get('phone','N/A'):<14} | {info.get('email','N/A')}")
+You said:
+please give me a code that Implement a check that prevents duplicate contacts from being added to the dictionary
+ChatGPT said:
+
+Thought for 30s
+# Contact Book (nested dict) with duplicate-check on add
+# - Prevents adding a contact if the same name already exists (case-insensitive)
+
+# Starter data
+contacts = {
+    "Alice Nguyen": {"phone": "0400 123 456", "email": "alice.nguyen@example.com"},
+    "Bob Singh": {"phone": "0412 345 678", "email": "bob.singh@example.com"},
+    "Charlie Brown": {"phone": "0433 987 210", "email": "charlie.brown@example.com"},
+}
+
+# --- Add with duplicate protection ---
+name = input("Enter new contact name: ").strip()
+
+# Case-insensitive duplicate check
+duplicate = False
+for existing in contacts:
+    if existing.lower() == name.lower():
+        duplicate = True
+        break
+
+if duplicate:
+    print(f"Contact '{name}' already exists. Not added.")
+else:
+    phone = input("Enter phone: ").strip()
+    email = input("Enter email: ").strip()
+    contacts[name] = {"phone": phone, "email": email}
+    print(f"Added '{name}'.")
+
+# --- Show updated contacts ---
+max_name_len = max(len(n) for n in contacts) if contacts else 4
+header = f"{'Name':<{max_name_len}} | {'Phone':<14} | Email"
+print("\n" + header)
+print("-" * len(header))
+for n, info in contacts.items():
+    print(f"{n:<{max_name_len}} | {info.get('phone','N/A'):<14} | {info.get('email','N/A')}")
+You said:
+Modify the contact book so each person can store more than one phone number (as a list inside the nested dictionary).
+ChatGPT said:
+
+Thought for 49s
+# Contact Book with multiple phone numbers per person
+# - Each contact stores a list of phone numbers under "phones" and one "email"
+# - Includes a simple add/update step and prints the table
+
+# 1) Define contacts (phones as a list)
+contacts = {
+    "Alice Nguyen": {
+        "phones": ["0400 123 456", "08 6123 4567"],
+        "email": "alice.nguyen@example.com"
+    },
+    "Bob Singh": {
+        "phones": ["0412 345 678"],
+        "email": "bob.singh@example.com"
+    },
+    "Charlie Brown": {
+        "phones": ["0433 987 210"],
+        "email": "charlie.brown@example.com"
+    },
+}
+
+# 2) Add another phone (creates the contact if it doesn't exist; avoids duplicate phones)
+name = input("Enter a contact name to add a phone (or create new): ").strip()
+
+# find existing key case-insensitively
+match_key = None
+for k in contacts:
+    if k.lower() == name.lower():
+        match_key = k
+        break
+
+if match_key is None:
+    # Create new contact
+    first_phone = input("Enter first phone: ").strip()
+    email = input("Enter email: ").strip()
+    contacts[name] = {"phones": [first_phone] if first_phone else [], "email": email}
+    print(f"Added new contact '{name}'.")
+else:
+    # Add phone to existing contact (no duplicates)
+    new_phone = input(f"Enter a phone number to add for '{match_key}': ").strip()
+    if new_phone:
+        if new_phone in contacts[match_key].get("phones", []):
+            print("That phone number is already listed; nothing added.")
+        else:
+            contacts[match_key]["phones"].append(new_phone)
+            print(f"Added phone for '{match_key}'.")
+    else:
+        print("No phone entered; nothing added.")
+
+# 3) Print table (phones joined by comma)
+max_name_len = max(len(n) for n in contacts) if contacts else 4
+header = f"{'Name':<{max_name_len}} | Phones | Email"
+print("\n" + header)
+print("-" * len(header))
+for n, info in contacts.items():
+    phones_list = info.get("phones", [])
+    phones_str = ", ".join(phones_list) if phones_list else "N/A"
+    email_str = info.get("email", "N/A")
+    print(f"{n:<{max_name_len}} | {phones_str} | {email_str}")
+
+
+
+
+No file chosenNo file chosen
+ChatGPT can make mistakes. Check important info.
